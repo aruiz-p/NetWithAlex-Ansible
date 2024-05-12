@@ -1,0 +1,24 @@
+---
+- name: Configure loopback and OSPF
+  hosts: iou
+  connection: network_cli
+  vars_files:
+    - vars.yml
+ 
+  vars:
+    ansible_ssh_user: "{{ credentials.user }}"
+    ansible_ssh_pass: "{{ credentials.pass }}"
+
+  tasks:
+    - name: config loopback 0
+      ios_config:
+        lines:
+          - interface loopback0
+          - ip address {{ router_ids[inventory_hostname] }} 255.255.255.255
+          - description configured with ansible
+    - name: configure ospf process
+      ios_config:
+        lines:
+          - router ospf 1
+          - router-id {{ router_ids[inventory_hostname] }}
+          - network 0.0.0.0 0.0.0.0 area 0

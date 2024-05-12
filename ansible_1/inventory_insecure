@@ -1,0 +1,5 @@
+[iou]
+R3 ansible_host=192.168.122.30 ansible_ssh_user=admin ansible_ssh_pass=admin ansible_network_os=ios
+R4 ansible_host=192.168.122.40 ansible_ssh_user=admin ansible_ssh_pass=admin ansible_network_os=ios
+R5 ansible_host=192.168.122.50 ansible_ssh_user=admin ansible_ssh_pass=admin ansible_network_os=ios
+R6 ansible_host=192.168.122.60 ansible_ssh_user=admin ansible_ssh_pass=admin ansible_network_os=ios

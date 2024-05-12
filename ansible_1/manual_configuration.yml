@@ -1,0 +1,55 @@
+---
+- name: Configure loopback 0 for OSPF
+  hosts: R3
+  connection: network_cli
+  gather_facts: false
+  tasks:
+    - name: config loopback 0
+      ios_config:
+        lines:
+          - hostname R3
+          - interface loopback0
+          - ip address 3.3.3.3 255.255.255.255
+          - description configured with ansible
+- name: Configure loopback 0 for OSPF
+  hosts: R4
+  connection: network_cli
+  tasks:
+    - name: config loopback 0
+      ios_config:
+        lines:
+          - hostname R4
+          - interface loopback0
+          - ip address 4.4.4.4 255.255.255.255
+          - description configured with ansible
+- name: Configure loopback 0 for OSPF
+  hosts: R5
+  connection: network_cli
+  tasks:
+    - name: config loopback 0
+      ios_config:
+        lines:
+          - hostname R5
+          - interface loopback0
+          - ip address 5.5.5.5 255.255.255.255
+          - description configured with ansible
+- name: Configure loopback 0 for OSPF
+  hosts: R6
+  connection: network_cli
+  tasks:
+    - name: config loopback 0
+      ios_config:
+        lines:
+          - hostname R6
+          - interface loopback0
+          - ip address 6.6.6.6 255.255.255.255
+          - description configured with ansible
+- name: Enable OSPF
+  hosts: iou
+  connection: network_cli
+  tasks:
+    - name: configure ospf process
+      ios_config:
+        lines:
+          - router ospf 1
+          - network 0.0.0.0 0.0.0.0 area 0

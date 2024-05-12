@@ -1,0 +1,21 @@
+---
+- name: delete loopback and ospf process
+  hosts: iou
+  connection: network_cli
+  vars_files:
+    - vars.yml
+ 
+  vars:
+    ansible_ssh_user: "{{ credentials.user }}"
+    ansible_ssh_pass: "{{ credentials.pass }}"  
+  
+  tasks:
+    - name: delete ospf process
+      ios_config:
+        lines:
+          - no router ospf 1
+
+    - name: delete config loopback 0
+      ios_config:
+        lines:
+          - no interface loopback0
