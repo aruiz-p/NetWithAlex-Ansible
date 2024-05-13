@@ -1,12 +1,19 @@
 ---
 - name: Show interfaces
-  hosts: R1
+  hosts: iou
   connection: network_cli
+  vars_files:
+    - vars.yml  
+  vars:
+    ansible_ssh_user: "{{credentials.user}}"
+    ansible_ssh_pass: "{{credentials.pass}}"
+
   tasks:
     - name: use ios commands
-      ios_command:
+      cisco.ios.ios_command:
         commands:
           - show ip interface brief
+          - show ip ospf neighbor
       register: output
     - name: format output
       debug:
