@@ -1,0 +1,12 @@
+interface Loopback 0
+ ip address {{ vars[inventory_hostname]['loop0_ip'] }} {{ vars['mask'] }}
+
+router ospf {{ ospf_process  }}
+ router-id {{ vars[inventory_hostname]['loop0_ip']  }}
+
+interface Ethernet0/0
+ ip ospf {{ vars['ospf_process'] }} area 0
+
+interface Loopback0
+ ip ospf {{ vars['ospf_process'] }} area 0
+

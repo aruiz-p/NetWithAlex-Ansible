@@ -1,0 +1,12 @@
+interface Loopback 0
+ ip address {{ loop0_ip }} {{ mask }}
+
+router ospf {{ ospf_process  }}
+ router-id {{ loop0_ip  }}
+
+interface Ethernet0/0
+ ip ospf {{ ospf_process }} area 0
+
+interface Loopback0
+ ip ospf {{ ospf_process }} area 0
+
