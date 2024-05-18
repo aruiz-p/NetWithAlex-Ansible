@@ -18,18 +18,40 @@ From the marketplace you can look for the following appliances and import them t
 * Cisco IOU L2
 * Network Automation
 
-### Installation
+### Topology
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+<img src="images/Ans-topo.png" alt="Topology" width="400" height="300">
+
+### Getting started
+
+#### 1. Configure devices and enable SSH access required for Ansible. 
+   Inside the _additional materials_ folder you can find the initial running config of the network devices, change it accordingly. You might still need to    generate the ssh key manually with 
    ```sh
-   git clone https://github.com/aruiz-p/repo_name.git
+   crypto key generate rsa modulus 2048
    ```
-3. Install NPM packages
+   If you shut down the IOU devices, the crypto keys will be erased, you can run the  _generate_ssh_key.yml_  to create it on all devices 
    ```sh
-   npm install
+   ansible-playbook generate_ssh_key.yml -i inventory_insecure
    ```
-4. Enter your API in `config.js`
+   At any time you can use the _erase_config.yml_ to erase configuration before pushing it again with through a playbook. 
+
+#### 2. Explore _ansible_1_
+   * This folder contains a playbook to configure Loopbacks and OSPF process. Notice tasks are repeated multiple times
+   * The inventory file contains user and password information
+   * The ansible.cfg file is using default information. To run the playbook you need to specify the inventory file (_-i option_).
+   ```sh 
+   ansible-playbook manual_configuration.yml -i inventory_insecure
+   ```
+  
+#### 3. Explore _ansible_2_
+   * This folder contains a playbook to configure Loopbacks and OSPF process using variables. This 2 tasks are enough to configure the 4 devices. 
+   * The inventory file is not containing user and password information. Instead, this information is passed on the playbook itself.  
+   * The ansible.cfg file was slightly altered to point to the local inventory file. Playbook can be run without _-i option_. 
+   ```sh
+   ansible-playbook variables_configuration.yml
+   ```
+
+#### 4. Explore _ansible_3_
    ```js
    const API_KEY = 'ENTER YOUR API';
    ```
