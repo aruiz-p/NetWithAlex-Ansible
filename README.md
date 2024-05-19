@@ -56,7 +56,7 @@ From the marketplace you can look for the following appliances and import them t
    * The Jinja templates will look for the values of the variables inside the router_vars.yml file 
    * The playbook contains a task to push the configuration file once it is created
    ```sh
-   ansible-playbook create_template.yml
+   ansible-playbook create_template_and_push.yml
    ```
 
 <!-- CONTACT -->
