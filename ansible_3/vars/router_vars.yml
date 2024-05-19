@@ -1,4 +1,8 @@
 ---
+credentials:
+  user: admin
+  pass: admin
+
 R3:
   loop0_ip: 3.3.3.3
 R4:

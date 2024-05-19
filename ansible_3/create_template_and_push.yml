@@ -1,0 +1,22 @@
+---
+- name: Generate configuration file from template
+  hosts: iou
+  connection: network_cli
+  gather_facts: no
+  vars_files:
+    - vars/router_vars.yml
+  vars:
+    ansible_ssh_user: "{{ credentials.user }}"
+    ansible_ssh_pass: "{{ credentials.pass }}"
+  tasks:
+    - name: Generate template
+      template:
+        src: templates/router_conf.j2
+        dest: "conf_files/{{ inventory_hostname  }}.cfg"
+    - name: Apply configuration to devices
+      cisco.ios.ios_config:
+        src: "conf_files/{{ inventory_hostname }}.cfg"
+      register: config_result
+    - name: Print debug information
+      debug:
+        var: config_result
